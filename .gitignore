@@ -160,6 +160,7 @@ cython_debug/
 .idea/
 /.idea/
 /back-end/venv/
+/back-end/output/
 /back-end/.idea/
 
 
