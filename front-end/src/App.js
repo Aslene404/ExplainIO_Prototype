@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
+import FileUpload from './components/FileUpload';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/hello')
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
   return (
     <div className="App">
-      <h1>Hello from React!</h1>
-      <p>{message}</p>
+      <h1>PDF Viewer</h1>
+      <FileUpload />
     </div>
   );
 }
 
 export default App;
+
