@@ -24,7 +24,7 @@ function App() {
   };
 
   const handlePopupOpen = () => {
-    setShowPopup(true);
+    setShowPopup(!showPopup);
   };
 
   const handlePopupClose = () => {
@@ -53,7 +53,7 @@ function App() {
           }}
         />
       )}
-      {!showDisplayImage && !showUploadPDF && !showPopup ? (
+      {!showDisplayImage && !showUploadPDF  ? (
       <button
         onClick={handlePopupOpen} // Add a button to open the Popup
         className="popup-button">
