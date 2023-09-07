@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import './App.css';
 import FileUpload from './components/FileUpload';
+import ChooseAvatar from './components/ChooseAvatar';
+import Accueil from './components/Accueil';
 import Popup from './components/Popup';
-import DisplayImage from './components/ChooseAvatar'; // Import the DisplayImage component
 
 function App() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showDisplayImage, setShowDisplayImage] = useState(false);
   const [showUploadPDF, setShowUploadPDF] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const options = ["Dialog zwischen Kollegen", "Frontalunterricht", "Ohne Charakter"];
 
   const handleOptionSelection = (option) => {
     setSelectedOption(option);
-    setShowDisplayImage(true); // Show DisplayImage when "Next" is clicked
+    setShowDisplayImage(true);
   };
 
   const handleShowUploadPDF = () => {
-    setShowDisplayImage(false); // Hide DisplayImage
-    setShowUploadPDF(true); // Show UploadPDF when "Next" is clicked
+    setShowDisplayImage(false);
+    setShowUploadPDF(true);
+  };
+
+  const handlePopupOpen = () => {
+    setShowPopup(true);
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -26,19 +36,31 @@ function App() {
       {showUploadPDF ? (
         <FileUpload />
       ) : showDisplayImage ? (
-        <DisplayImage />
+        <ChooseAvatar />
       ) : (
-        <Popup options={options} onSelection={handleOptionSelection} onClose={handleOptionSelection} />
+        <Accueil />
       )}
       {showDisplayImage && (
-         <img 
-         src={'/image.png'}
-         alt="Next"
-         onClick={handleShowUploadPDF}
-         style={{ cursor: 'pointer',width: '40px',
-         height: '40px',
-         margin: '5px 10px' }}
-       />
+        <img
+          src={'/image.png'}
+          alt="Next"
+          onClick={handleShowUploadPDF}
+          style={{
+            cursor: 'pointer',
+            width: '40px',
+            height: '40px',
+            margin: '5px 10px',
+          }}
+        />
+      )}
+      {!showDisplayImage && !showUploadPDF && !showPopup ? (
+      <button
+        onClick={handlePopupOpen} // Add a button to open the Popup
+        className="popup-button">
+        Lass es uns versuchen
+      </button>): ''}
+      {showPopup && (
+        <Popup options={options} onSelection={handleOptionSelection} onClose={handlePopupClose} />
       )}
     </div>
   );
