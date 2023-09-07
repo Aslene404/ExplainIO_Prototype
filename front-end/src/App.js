@@ -11,6 +11,7 @@ function App() {
   const [showUploadPDF, setShowUploadPDF] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
+
   const options = ["Dialog zwischen Kollegen", "Frontalunterricht", "Ohne Charakter"];
 
   const handleOptionSelection = (option) => {
@@ -29,10 +30,12 @@ function App() {
 
   const handlePopupClose = () => {
     setShowPopup(false);
+
   };
 
   return (
     <div className="App">
+
       {showUploadPDF ? (
         <FileUpload />
       ) : showDisplayImage ? (
@@ -61,8 +64,10 @@ function App() {
       </button>): ''}
       {showPopup && (
         <Popup options={options} onSelection={handleOptionSelection} onClose={handlePopupClose} />
+
       )}
     </div>
+    
   );
 }
 
