@@ -1,5 +1,5 @@
 from flask_cors import CORS
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from api_call import call_did_api
 
 app = Flask(__name__)
@@ -13,6 +13,10 @@ def hello_world():
 
 @app.route('/api/upload')
 def upload():
+    # data = request.get_json()
+    # img_data = data.get('img_data')
+    # avatar_url=data.get('avatar_url')
+    # voice_id=data.get('voice_id')
     response = call_did_api()
     return jsonify(message=response)
 

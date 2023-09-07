@@ -3,12 +3,16 @@ import os
 import requests
 import time
 
+from video_processing import crop_video
+
 url = "https://api.d-id.com/talks"
-api_key = "Y2V5b2pveDMyN0BuaWNrb2xpcy5jb20:F-ICs1GvymYbdOHFWLbCC"
+api_key = "cGV3b2c1OTc1N0BzZWFycGVuLmNvbQ:fnMA-YjYTpvC1loBGjijt"
+# male voices : "de-DE-ConradNeural" | "de-DE-BerndNeural" | "de-DE-KasperNeural"
 male_voice="de-DE-ConradNeural"
+# female voices: "de-DE-MajaNeural" | "de-DE-ElkeNeural" | "de-DE-KlarissaNeural"
 female_voice="de-DE-MajaNeural"
-male_image='https://media.istockphoto.com/id/1143500885/vector/man-portrait-with-beard-vector-illustration-of-male-character.jpg?s=612x612&w=0&k=20&c=v9pv64ASjUYTRscfrYXEeof-oI2IfTPwJPuxRWNeG74='
-female_image='https://cdn3.vectorstock.com/i/1000x1000/13/87/cartoon-avatar-woman-front-view-vector-9421387.jpg'
+male_image='https://res.cloudinary.com/ddejpouvy/image/upload/v1694081145/2Capture-PhotoRoom.png-PhotoRoom_c65pgw.png'
+female_image='https://res.cloudinary.com/ddejpouvy/image/upload/v1694089469/13Capture-PhotoRoom.png-PhotoRoom_qhwiar.png'
 textinput="Random Page Patrol ist eine gemeinschaftliche Wikipedia-Patrouille, die sich auf den Prozess der regelmäßigen und häufigen Überprüfung zufällig ausgewählter Seiten durch Special:Random bezieht."
 def download_video(id):
     headers = {
@@ -52,6 +56,7 @@ def download_video(id):
                         file.write(response.content)
 
                     print(f"File downloaded and saved as '{local_video_path}'")
+                    crop_video(local_video_path)
                 else:
                     print(f"File download failed with status code {response.status_code}")
                 return response.text
@@ -65,17 +70,20 @@ def download_video(id):
 
 def call_did_api():
     payload = {
-        "source_url": female_image,
+        "source_url": male_image,
         "script": {
             "type": "text",
             "input": textinput,
             "provider": {
                 "type": "microsoft",
-                "voice_id": female_voice,
+                "voice_id": male_voice,
                 "voice_config": {
                     "style": "Default"
                 }
             }
+        },
+        "config": {
+            "stitch": True
         }
     }
     headers = {
