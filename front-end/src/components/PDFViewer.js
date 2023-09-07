@@ -63,6 +63,17 @@ const PDFViewer = ({ file }) => {
 
     loadPDF();
   }, [file]);
+  const goToPreviousPage = () => {
+    if (pageNum > 1) {
+      setPageNum(pageNum - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (pageNum < (pdfDoc ? pdfDoc.numPages : 1)) {
+      setPageNum(pageNum + 1);
+    }
+  };
 
   const handleMouseDown = (e) => {
     const canvas = canvasRef.current;
@@ -148,7 +159,7 @@ const PDFViewer = ({ file }) => {
   };
 
   return (
-    <div className="pdf-container" ref={pdfContainerRef}>
+    <div className="pdf-container" ref={pdfContainerRef} style={{margin: '20px'}}>
       <canvas
         className="pdf-canvas"
         ref={canvasRef}
@@ -167,6 +178,11 @@ const PDFViewer = ({ file }) => {
           }}
         />
       )}
+       <div className="pdf-navigation" style={{ marginTop: '20px', position: 'center'}}>
+        <button  style={{marginLeft: 20}}onClick={goToPreviousPage} disabled={pageNum === 1}>Previous Page</button>
+        <span style={{marginLeft: 20}}>Page {pageNum}</span>
+        <button style={{marginLeft: 20}}onClick={goToNextPage} disabled={pageNum === (pdfDoc ? pdfDoc.numPages : 1)}>Next Page</button>
+      </div>
     </div>
   );
 };
