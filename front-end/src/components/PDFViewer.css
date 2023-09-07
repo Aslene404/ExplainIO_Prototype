@@ -1,0 +1,21 @@
+/* PDF container styles */
+.pdf-container {
+  position: relative;
+  max-width: 800px; /* Adjust the maximum width as needed */
+  margin: 0 auto;
+}
+
+/* PDF canvas styles */
+.pdf-canvas {
+  border: 1px solid #ddd; /* Border for the canvas */
+  display: block;
+}
+
+/* Selection rectangle styles */
+.selection-rectangle {
+  position: absolute;
+  border: 2px dashed #FF5733; /* Dashed border for the selection rectangle */
+  background-color: rgba(255, 87, 51, 0.3); /* Semi-transparent background color */
+  pointer-events: none; /* Prevent the rectangle from interfering with mouse events on the canvas */
+  z-index: 2; /* Place the rectangle above the canvas */
+}
