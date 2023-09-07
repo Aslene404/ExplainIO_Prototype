@@ -130,18 +130,21 @@ li {
 }
 
 .popup-button{
-  margin: 5px;
+  margin: 10px 5px;
   height: 25px;
   position: absolute;
   inline-size: fit-content;
-  background: none;
-  color: #e6cece;
+  background-color: #e6cece;
+  color: #fff;  
+  border-radius: 4px;
   border: none;
   cursor: pointer;
+  height: 25px;
+  inline-size: fit-content;
 }
 
 .popup-button:hover{
-  color: #9E221D;
+  background-color: #9E221D;
 }
 
 /* Add this CSS to your stylesheet */
@@ -171,13 +174,16 @@ li {
   background-color: #9E221D;
 }
 .guide-button{
-  background:none;
-  color: #e6cece;
+  background-color: #e6cece;
+  color: #fff;
   border: none;
   cursor: pointer;
   position: absolute;
   top: 10px;
   left: 160px;
+  height: 25px;
+  inline-size: fit-content;
+  border-radius: 4px;
 }
 
 .guide-button:hover {
