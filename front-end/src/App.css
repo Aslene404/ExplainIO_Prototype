@@ -1,38 +1,202 @@
 .App {
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #E6CECE;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  display: flex;
+  z-index: 2;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }
 
-.App-header {
-  background-color: #282c34;
+li {
+  color: #F7F7F7;
+  padding: 10px 0;
+  font-size: larger;
+}
+
+.popup-confirm {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #f5ce65;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.avatar-container {
+  display: flex;
+  width: 100%;
+}
+
+.image-container {
+  display: flex;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.avatar-images {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
+
+.selected-avatar {
+  margin-top: 5%;
+  margin-left: 5%;
+  width: 100%;
+  height: 500px;
+  border: dashed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.selected-avatars {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.selected-border {
+  border: solid 1px #e0e0e0;
+}
+
+.background {
+  height: 50px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  border: none;
+}
+
+.home-page {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+
+.content-container{
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+   border-radius: 10px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+
+    position: relative;
+    z-index: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.popup-button{
+  margin: 10px 5px;
+  position: absolute;
+  inline-size: fit-content;
+  background-color: #e6cece;
+  color: #fff;  
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  inline-size: fit-content;
+}
+
+.popup-button:hover{
+  background-color: #9E221D;
+}
+
+/* Add this CSS to your stylesheet */
+
+.top-buttons {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.login-button,
+.signin-button {
+  background-color: #e6cece;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 30px;
+  inline-size: fit-content;
+
+}
+
+.login-button:hover,
+.signin-button:hover {
+  background-color: #9E221D;
+}
+.guide-button{
+  background-color: #e6cece;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 160px;
+  height: 30px;
+  inline-size: fit-content;
+  border-radius: 4px;
+}
+
+.guide-button:hover {
+  background-color: #9E221D;
+}
+
+.guide-container {
+  position: fixed;
+  width: 700px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the GuideApp is above other content */
+  flex-direction: column;
 }
