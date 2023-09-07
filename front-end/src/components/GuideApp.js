@@ -9,7 +9,7 @@ function Guide() {
         <iframe
           width="560"
           height="315"
-          src="http://www.youtube.com/watch?v=uf3-gW4RJBs&ab_channel=ZiedMcHarek"
+          src="https://youtu.be/uf3-gW4RJBs?si=uk6Z_7JPtpTv4Di_"
           title="Guide Video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
