@@ -37,7 +37,7 @@ function Accueil() {
         <button className="login-button">Login</button>
         <button className="signin-button">Sign In</button>
       </div>
-      <button className="guide-button" onClick={toggleGuide}>
+      <button className="guide-button" onClick={toggleGuide} style={{margin:'10px 35px'}}>
         Führung
       </button>
       {showGuide && <Guide  />  } {/* Render the Guide component when showGuide is true */}

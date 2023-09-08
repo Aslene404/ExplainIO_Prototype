@@ -53,8 +53,8 @@ function App() {
       )}
       {!showDisplayImage && !showUploadPDF  ? (
       <button
-        onClick={handlePopupOpen} // Add a button to open the Popup
-        className="popup-button">
+        onClick={handlePopupOpen} 
+        className="popup-button" style={{margin:'20px 10px'}}>
         Lass es uns versuchen
       </button>): ''}
       {showPopup && (

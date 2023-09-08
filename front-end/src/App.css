@@ -14,8 +14,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 5px;
-  width: 300px;
-  height: 200px;
+  width: 350px;
+  height: 240px;
   border-radius: 10px;
   display: flex;
   z-index: 2;
@@ -225,11 +225,11 @@ li {
 .voice-select {
   position: absolute;
   width: 100%;
-  margin: 10px;
+  margin: 15px;
   display: flex;
   flex-direction: column;
   align-items: end;
-  right: 200px;
+  right: 220px;
 }
 
 .voice-label {
@@ -240,7 +240,7 @@ li {
   cursor: pointer;
   user-select: none;
   width: 200px;
-  height: 30px;
+  height: 50px;
   border-radius: 5px;
   background-color: #e0e0e0;
   margin-top: -4px;
