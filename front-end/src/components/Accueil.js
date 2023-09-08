@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Guide from './GuideApp';
 
 function Accueil() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const backgroundImages = [
     '/home-backgrounds/background1.avif',
     '/home-backgrounds/background3.avif',

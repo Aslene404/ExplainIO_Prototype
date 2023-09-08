@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/+esm'
 import './PDFViewer.css'; // You can define your own styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AnnotationModal from './AnnotationModal';
+
 pdfjsDist.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsDist.version}/pdf.worker.js`;
 
 const PDFViewer = ({ file }) => {
@@ -16,7 +19,15 @@ const PDFViewer = ({ file }) => {
     width: 0,
     height: 0,
   });
+  const [showMyModal, setShowMyModal] = useState(false);
 
+  const handleOpenMyModal = () => {
+    setShowMyModal(true);
+  };
+
+  const handleCloseMyModal = () => {
+    setShowMyModal(false);
+  };
   const pdfContainerRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -130,7 +141,6 @@ const PDFViewer = ({ file }) => {
     screenshotCtx.putImageData(imageData, 0, 0);
   
     // Convert the screenshot canvas to a data URL (base64)
-    const screenshotDataURL = screenshotCanvas.toDataURL('image/png');
   
     // Use PDF.js to extract text from the selected area
     pdfDoc.getPage(pageNum).then((page) => {
@@ -154,10 +164,10 @@ const PDFViewer = ({ file }) => {
   
         const selectedText = selectedTextItems.join(' ');
         setSelectedText(selectedText);
+        handleOpenMyModal();
         console.log('Selected Text:', selectedText);
-  
-        // Send the selected text to the backend or use it as needed
-        // ...
+        
+        
       });
     });
   
@@ -171,12 +181,11 @@ const PDFViewer = ({ file }) => {
   
   return (
     <div className='pdf-file'>
-      <div className='annotation'>
+      <div  className='annotation'>
         <div> 
-          <h4>Your annotations</h4>
+          <h3 style={{margin: 20}}><strong>Your annotations</strong></h3>
         </div>
-        <div className="selected-text">
-          <strong>Selected Text:</strong> {selectedText}
+        <div style={{margin: 20}}className="selected-text">
         </div>
     </div>
      <div className="pdf-container" ref={pdfContainerRef} >
@@ -198,12 +207,30 @@ const PDFViewer = ({ file }) => {
           }}
         />
       )}
-       <div className="pdf-navigation" style={{ marginTop: '20px', position: 'center'}}>
-        <button  style={{marginLeft: 20}}onClick={goToPreviousPage} disabled={pageNum === 1}>Previous Page</button>
-        <span style={{marginLeft: 20}}>Page {pageNum}</span>
-        <button style={{marginLeft: 20}}onClick={goToNextPage} disabled={pageNum === (pdfDoc ? pdfDoc.numPages : 1)}>Next Page</button>
+       <div className="pdf-navigation" style={{ marginTop: '20px', display: "flex", flexDirection: 'row' , justifyContent: 'space-between'}}>
+        <button type="button" class="btn btn-primary" onClick={goToPreviousPage} disabled={pageNum === 1}>Previous Page</button>
+        <span>Page {pageNum}</span>
+        <button type="button" class="btn btn-primary" onClick={goToNextPage} disabled={pageNum === (pdfDoc ? pdfDoc.numPages : 1)}>Next Page</button>
       </div>
+      <div>
+      <button
+      style={{ margin: 20, display: 'none' }}
+      type="button"
+      className="btn btn-primary"
+      onClick={handleOpenMyModal}
+    >
+      Open My Modal
+    </button>
+
+    <AnnotationModal
+      show={showMyModal}
+      onClose={handleCloseMyModal}
+      title="New Annotation"
+      content={selectedText}
+    />
+    </div>
      </div>
+     
   </div>
   );
 };
