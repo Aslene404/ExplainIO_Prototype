@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PDFViewer from './PDFViewer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function FileUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -12,10 +13,19 @@ function FileUpload() {
   };
 
   return (
-    <div style={{width:'100%'}}>
-      <input type="file" accept=".pdf" onChange={handleFileChange} />
-      {selectedFile && <PDFViewer file={selectedFile} />}
-    </div>
+    <div style={{ width: '100%', margin: 20 }}>
+    <label className="btn btn-primary">
+      Choose a PDF file
+      <input
+        type="file"
+        style={{ display: 'none' }}
+        accept=".pdf"
+        onChange={handleFileChange}
+      />
+    </label>
+    {selectedFile && <PDFViewer file={selectedFile} />}
+  </div>
+  
   );
 }
 
