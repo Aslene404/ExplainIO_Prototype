@@ -1,8 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function AnnotationModal({ show, onClose, title, content }) {
+function AnnotationModal({ show, onClose, title, content, onAddAnnotation }) {
+  const [annotationTitle, setAnnotationTitle] = useState(''); // State to store the annotation title
+  const [annotationContent, setAnnotationContent] = useState('');
+  useEffect(() => {
+    // Update annotationContent when content prop changes
+    setAnnotationContent(content);
+  }, [content]);
+  const handleTitleChange = (e) => {
+    setAnnotationTitle(e.target.value);
+  };
+
+  const handleContentChange = (e) => {
+    setAnnotationContent(e.target.value);
+  };
+
+  const handleAddClick = () => {
+    onAddAnnotation(annotationTitle, annotationContent);
+  };
   return (
     <div>
       <div
@@ -27,22 +44,35 @@ function AnnotationModal({ show, onClose, title, content }) {
             <div className="modal-body">
             <form>
             <div className="mb-3">
-              <label htmlFor="recipient-name" className="col-form-label">
+            <label htmlFor="recipient-name" className="col-form-label">
                 Your script title:
               </label>
-              <input type="text" className="form-control" id="recipient-name" />
+              <input
+            type="text"
+            className="form-control"
+            id="recipient-name"
+            value={annotationTitle}
+            onChange={handleTitleChange}
+          />
+              
             </div>
             <div className="mb-3">
               <label htmlFor="message-text" className="col-form-label">
                 Saved Script
               </label>
-              <textarea className="form-control"  defaultValue={content} id="message-text"></textarea>
+              <textarea
+            className="form-control"
+            id="message-text"
+            defaultValue={annotationContent}  // Set the value here
+            onChange={handleContentChange}           ></textarea>
             </div>
           </form>
             </div>
-              <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Add annotation</button>
-          </div>
+            <div className="modal-footer">
+        <button type="button" className="btn btn-primary" onClick={handleAddClick}>
+          Add Annotation
+        </button>
+      </div>
 
           </div>
         </div>
@@ -52,4 +82,3 @@ function AnnotationModal({ show, onClose, title, content }) {
 }
 
 export default AnnotationModal;
-
