@@ -170,11 +170,16 @@ const PDFViewer = ({ file }) => {
   
   
   return (
-    <div>
-      <div> 
-        <h4>Your annotations</h4>
-      </div>
-      <div className="pdf-container" ref={pdfContainerRef} style={{margin: '20px'}}>
+    <div className='pdf-file'>
+      <div className='annotation'>
+        <div> 
+          <h4>Your annotations</h4>
+        </div>
+        <div className="selected-text">
+          <strong>Selected Text:</strong> {selectedText}
+        </div>
+    </div>
+     <div className="pdf-container" ref={pdfContainerRef} >
       <canvas
         className="pdf-canvas"
         ref={canvasRef}
@@ -198,13 +203,8 @@ const PDFViewer = ({ file }) => {
         <span style={{marginLeft: 20}}>Page {pageNum}</span>
         <button style={{marginLeft: 20}}onClick={goToNextPage} disabled={pageNum === (pdfDoc ? pdfDoc.numPages : 1)}>Next Page</button>
       </div>
-      <div className="selected-text">
-  <strong>Selected Text:</strong> {selectedText}
-</div>
-
-    </div>
-    </div>
-    
+     </div>
+  </div>
   );
 };
 

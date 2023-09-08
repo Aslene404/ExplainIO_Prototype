@@ -19,3 +19,24 @@
   pointer-events: none; /* Prevent the rectangle from interfering with mouse events on the canvas */
   z-index: 2; /* Place the rectangle above the canvas */
 }
+
+.pdf-file{
+  display: flex;
+  padding: 10px;
+  width: 100%;
+}
+
+.annotation{
+  width: 25%;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+.pdf-container{
+  width: 70%;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

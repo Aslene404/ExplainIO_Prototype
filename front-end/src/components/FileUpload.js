@@ -12,7 +12,7 @@ function FileUpload() {
   };
 
   return (
-    <div>
+    <div style={{width:'100%'}}>
       <input type="file" accept=".pdf" onChange={handleFileChange} />
       {selectedFile && <PDFViewer file={selectedFile} />}
     </div>
