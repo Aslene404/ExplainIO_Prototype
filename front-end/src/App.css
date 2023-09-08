@@ -58,6 +58,8 @@ li {
 .avatar-container {
   display: flex;
   width: 100%;
+  flex-direction: column;
+
 }
 
 .image-container {
@@ -69,6 +71,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 5;
 }
 
 .image {
@@ -80,6 +83,13 @@ li {
 .image-selected{
   width: 200px;
   height: 400px;
+}
+
+.audio-list{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .selected-avatar {
@@ -204,10 +214,71 @@ li {
   position: fixed;
   width: 700px;
   height: 500px;
-  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.3); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Ensure the GuideApp is above other content */
+  z-index: 9999; 
   flex-direction: column;
+}
+
+.voice-select {
+  position: absolute;
+  width: 100%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  right: 200px;
+}
+
+.voice-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  margin-top: -4px;
+}
+  
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.arrow-up {
+  transform: rotate(180deg);
+}
+
+.voice-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 100px;
+  overflow-y: auto;
+  width: 220px;
+}
+
+.voice {
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.selected-voice {
+  background-color: #ccc;
+}
+
+audio {
+  margin-top: 10px;
 }
