@@ -11,6 +11,9 @@ const PDFViewer = ({ file }) => {
   const [pageNum, setPageNum] = useState(1);
   const [scale, setScale] = useState(1);
   const [isSelecting, setIsSelecting] = useState(false);
+  const [annotations, setAnnotations] = useState([]); // State to store annotations
+  const [newAnnotation, setNewAnnotation] = useState({ title: '', content: '' }); // State to store the new annotation
+
   const [selectedText, setSelectedText] = useState('');
 
   const [selectionRect, setSelectionRect] = useState({
@@ -27,6 +30,14 @@ const PDFViewer = ({ file }) => {
 
   const handleCloseMyModal = () => {
     setShowMyModal(false);
+
+    if (newAnnotation.title && newAnnotation.content) {
+      // Add the annotation to the state
+      setAnnotations([...annotations, newAnnotation]);
+      
+      // Clear the modal's title and content fields
+      setNewAnnotation({ title: '', content: '' });
+    }
   };
   const pdfContainerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -103,6 +114,17 @@ const PDFViewer = ({ file }) => {
       height: 0,
     });
   };
+  
+
+  const handleAddAnnotation = (title, content) => {
+    if (title) {
+      // Add the annotation to the state
+      setAnnotations([...annotations, { title, content }]);
+      
+      // Clear the modal's title and content fields
+      setShowMyModal(false);
+    }
+  };
 
   const handleMouseMove = (e) => {
     if (isSelecting) {
@@ -165,7 +187,6 @@ const PDFViewer = ({ file }) => {
         const selectedText = selectedTextItems.join(' ');
         setSelectedText(selectedText);
         handleOpenMyModal();
-        console.log('Selected Text:', selectedText);
         
         
       });
@@ -183,9 +204,17 @@ const PDFViewer = ({ file }) => {
     <div className='pdf-file'>
       <div  className='annotation'>
         <div> 
-          <h3 style={{margin: 20}}><strong>Your annotations</strong></h3>
+        <h3 style={{ margin: 20 }}><strong>Your annotations : </strong></h3>
         </div>
-        <div style={{margin: 20}}className="selected-text">
+        <div style={{ margin: 20 }} className="selected-text">
+          {/* Render annotations */}
+          {annotations.map((annotation, index) => (
+            <div key={index}>
+              <h4>{annotation.title}</h4>
+              <p>{annotation.content}</p>
+              <div style={{ borderTop: "1px solid black" }}></div>                
+            </div>
+          ))}
         </div>
     </div>
      <div className="pdf-container" ref={pdfContainerRef} >
@@ -214,20 +243,21 @@ const PDFViewer = ({ file }) => {
       </div>
       <div>
       <button
-      style={{ margin: 20, display: 'none' }}
-      type="button"
-      className="btn btn-primary"
-      onClick={handleOpenMyModal}
-    >
-      Open My Modal
-    </button>
+        style={{ margin: 20 , display: "none"}}
+        type="button"
+        className="btn btn-primary"
+        onClick={handleOpenMyModal}
 
-    <AnnotationModal
-      show={showMyModal}
-      onClose={handleCloseMyModal}
-      title="New Annotation"
-      content={selectedText}
-    />
+      >
+        Open My Modal
+      </button>
+      <AnnotationModal
+        show={showMyModal}
+        onClose={handleCloseMyModal}
+        onAddAnnotation={handleAddAnnotation} // Pass the handler to the modal
+        title="New Annotation"
+        content={selectedText}
+      />
     </div>
      </div>
      
