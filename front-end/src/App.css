@@ -225,7 +225,7 @@ li {
 .voice-select {
   position: absolute;
   width: 100%;
-  margin: 15px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -265,7 +265,7 @@ li {
   border-top: none;
   max-height: 100px;
   overflow-y: auto;
-  width: 220px;
+  width: 200px;
 }
 
 .voice {
