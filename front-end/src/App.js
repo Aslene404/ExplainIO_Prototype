@@ -45,12 +45,7 @@ function App() {
           src={'/image.png'}
           alt="Next"
           onClick={handleShowUploadPDF}
-          style={{
-            cursor: 'pointer',
-            width: '40px',
-            height: '40px',
-            margin: '5px 10px',
-          }}
+          className='uploadPdf'
         />
       )}
       {!showDisplayImage && !showUploadPDF  ? (

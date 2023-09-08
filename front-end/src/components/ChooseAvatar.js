@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Popup from './Popup'; // Import the Popup component
 
 function Avatar() {
@@ -13,10 +13,23 @@ function Avatar() {
     "am Arbeitsplatz": '/background/workspace.jpg',
   };
 
-  const avatars = [
-    { imageUrl: '/avatars/avatar1.jpg', altText: 'Avatar 1' },
-    { imageUrl: '/avatars/avatar2.jpg', altText: 'Avatar 2' },
-  ];
+  const [avatars, setAvatars] = useState([]); // State to store the avatars fetched from avatars.txt
+
+  useEffect(() => {
+    // Fetch avatars from avatars.txt
+    fetch('/avatars/avatarLinks.txt')
+      .then((response) => response.text())
+      .then((text) => {
+        // Split the text into an array of avatar URLs
+        const avatarUrls = text.split('\n').filter((url) => url.trim() !== '');
+        setAvatars(avatarUrls.map((imageUrl) => ({ imageUrl, altText: 'Avatar' })));
+      })
+      .catch((error) => {
+        console.error('Error fetching avatars:', error);
+      });
+  }, []);
+
+  
 
   const handleAvatarClick = (avatarUrl) => {
     if (selectedAvatars.includes(avatarUrl)) {
@@ -44,37 +57,39 @@ function Avatar() {
   return (
     <div className="avatar-container">
       <div className="image-container">
-      <div className="avatar-images">
-        {avatars.map((avatar, index) => (
-          <div
-            key={index}
-            className={`avatar ${selectedAvatars.includes(avatar.imageUrl) ? 'selected' : ''}`}
-            onClick={() => handleAvatarClick(avatar.imageUrl)}
-          >
-            <img
-              src={avatar.imageUrl}
-              alt={avatar.altText}
-              className={`image ${selectedAvatars.includes(avatar.imageUrl) ? 'selected-border' : ''}`}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="selected-avatar"
-        style={{ backgroundImage: `url(${selectedBackground})` }}
-      >
-        {selectedAvatars.length > 0 && (
-          <>
-            <div className="selected-avatars">
-              {selectedAvatars.map((avatarUrl, index) => (
-                <img key={index} src={avatarUrl} alt="Selected Avatar" className="image" />
-              ))}
+        <div className="avatar-images">
+          {avatars.map((avatar, index) => (
+            <div
+              key={index}
+              className={`avatar ${selectedAvatars.includes(avatar.imageUrl) ? 'selected' : ''}`}
+              onClick={() => handleAvatarClick(avatar.imageUrl)}
+            >
+              <img
+                src={avatar.imageUrl}
+                alt={avatar.altText}
+                className={`image ${selectedAvatars.includes(avatar.imageUrl) ? 'selected-border' : ''}`}
+              />
             </div>
-          </>
-        )}
+          ))}
+        </div>
+        <div
+          className="selected-avatar"
+          style={{ backgroundImage: `url(${selectedBackground})` }}
+        >
+          {selectedAvatars.length > 0 && (
+            <>
+              <div className="selected-avatars">
+                {selectedAvatars.map((avatarUrl, index) => (
+                  <img key={index} src={avatarUrl} alt="Selected Avatar" className="image-selected" />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
-      </div>
-      <button onClick={handleShowPopup} className='background'>Hintergrund auswählen</button> {/* Button to show the popup */}
+      <button onClick={handleShowPopup} className='background'>
+        Hintergrund auswählen
+      </button> {/* Button to show the popup */}
       {showPopup && (
         <Popup options={options} onSelection={handleOptionSelection} onClose={handleNextButtonClick} />
       )}
