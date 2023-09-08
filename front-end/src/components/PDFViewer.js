@@ -170,7 +170,11 @@ const PDFViewer = ({ file }) => {
   
   
   return (
-    <div className="pdf-container" ref={pdfContainerRef} style={{margin: '20px'}}>
+    <div>
+      <div> 
+        <h4>Your annotations</h4>
+      </div>
+      <div className="pdf-container" ref={pdfContainerRef} style={{margin: '20px'}}>
       <canvas
         className="pdf-canvas"
         ref={canvasRef}
@@ -199,6 +203,8 @@ const PDFViewer = ({ file }) => {
 </div>
 
     </div>
+    </div>
+    
   );
 };
 
