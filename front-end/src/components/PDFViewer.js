@@ -3,7 +3,9 @@ import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/+esm'
 import './PDFViewer.css'; // You can define your own styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AnnotationModal from './AnnotationModal';
-
+import Pannel from './Pannel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {    faTrashCan } from '@fortawesome/free-solid-svg-icons';
 pdfjsDist.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsDist.version}/pdf.worker.js`;
 
 const PDFViewer = ({ file }) => {
@@ -12,7 +14,8 @@ const PDFViewer = ({ file }) => {
   const [scale, setScale] = useState(1);
   const [isSelecting, setIsSelecting] = useState(false);
   const [annotations, setAnnotations] = useState([]); // State to store annotations
-  const [newAnnotation, setNewAnnotation] = useState({ title: '', content: '' }); // State to store the new annotation
+  const [newAnnotation, setNewAnnotation] = useState({ title: '', content: '' });
+  let firstFourTitles = [];
 
   const [selectedText, setSelectedText] = useState('');
 
@@ -30,14 +33,6 @@ const PDFViewer = ({ file }) => {
 
   const handleCloseMyModal = () => {
     setShowMyModal(false);
-
-    if (newAnnotation.title && newAnnotation.content) {
-      // Add the annotation to the state
-      setAnnotations([...annotations, newAnnotation]);
-      
-      // Clear the modal's title and content fields
-      setNewAnnotation({ title: '', content: '' });
-    }
   };
   const pdfContainerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -117,13 +112,31 @@ const PDFViewer = ({ file }) => {
   
 
   const handleAddAnnotation = (title, content) => {
-    if (title) {
-      // Add the annotation to the state
-      setAnnotations([...annotations, { title, content }]);
-      
+    if (title ) {
+      // Check if an annotation with the same title already exists
+      const existingAnnotationIndex = annotations.findIndex(
+        (annotation) => annotation.title === title
+      );
+  
+      if (existingAnnotationIndex !== -1) {
+        // If an annotation with the same title exists, update its content
+        const updatedAnnotations = [...annotations];
+        updatedAnnotations[existingAnnotationIndex].content +=
+          '\n' + content; // You can adjust how you want to combine the content
+  
+        // Update the state with the updated annotations
+        setAnnotations(updatedAnnotations);
+      } else {
+        // If no annotation with the same title exists, add the new annotation
+        setAnnotations([...annotations, {title, content}]);
+      }
+  
       // Clear the modal's title and content fields
-      setShowMyModal(false);
+      setNewAnnotation({ title: '', content: '' });
     }
+  
+    // Close the modal
+    setShowMyModal(false);
   };
 
   const handleMouseMove = (e) => {
@@ -140,6 +153,10 @@ const PDFViewer = ({ file }) => {
         height: endY - prevRect.y,
       }));
     }
+  };
+  const handleClearBoard = () => {
+    // Clear the annotations by setting the state to an empty array
+    setAnnotations([]);
   };
 
   const handleMouseUp = () => {
@@ -195,6 +212,12 @@ const PDFViewer = ({ file }) => {
     // Reset the selection rectangle
     setSelectionRect({ x: 0, y: 0, width: 0, height: 0 });
   };
+  const handleDeleteAnnotation = (index) => {
+    // Create a new array excluding the clicked annotation
+    const updatedAnnotations = annotations.filter((_, i) => i !== index);
+    // Update the state with the new array
+    setAnnotations(updatedAnnotations);
+  };
   
   
 
@@ -202,22 +225,44 @@ const PDFViewer = ({ file }) => {
   
   return (
     <div className='pdf-file'>
-      <div  className='annotation'>
-        <div> 
-        <h3 style={{ margin: 20 }}><strong>Your annotations : </strong></h3>
-        </div>
-        <div style={{ margin: 20 }} className="selected-text">
-          {/* Render annotations */}
-          {annotations.map((annotation, index) => (
-            <div key={index}>
-              <h4>{annotation.title}</h4>
-              <p>{annotation.content}</p>
-              <div style={{ borderTop: "1px solid black" }}></div>                
-            </div>
-          ))}
-        </div>
+      <div className='annotation' style={{ overflowY: 'auto',  height: '100vh'  }}>
+     <div>
+       <h3 style={{ margin: 20, color: "#777777" }}><strong>My Annotations</strong></h3>
     </div>
-     <div className="pdf-container" ref={pdfContainerRef} >
+  <div style={{ margin: 30 }} className="selected-text">
+  {annotations.length > 0 ? (
+        annotations.map((annotation, index) => (
+          <div key={index}>
+            <h5 style={{ color: "#999999" }}>{annotation.title}</h5>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <p style={{ margin: 5, color: "#919191" }}>{annotation.content}</p>
+              <FontAwesomeIcon icon={faTrashCan} size="2xl" onClick={() => handleDeleteAnnotation(index)}style={{ paddingTop: 20 }} />
+            </div>
+            <div style={{ borderTop: "1px solid black", margin: 20}}></div>
+            
+          </div>
+         
+        ))
+        
+      ) : (
+        <p>Select a text to save it.</p>
+      )}
+       { annotations.length >0 ? (<div style={{  bottom: '20px', margin: "10" }}>
+          <button type="button" onClick={handleClearBoard} class="btn btn-primary">Clear the Board</button>
+        </div>)
+        : (<div>
+          
+        </div>)
+        }
+   
+  </div>
+</div>
+
+
+    
+      <div className='pdf-display'>
+      <Pannel />
+      <div className='pdf-container' ref={pdfContainerRef} >
       <canvas
         className="pdf-canvas"
         ref={canvasRef}
@@ -257,9 +302,12 @@ const PDFViewer = ({ file }) => {
         onAddAnnotation={handleAddAnnotation} // Pass the handler to the modal
         title="New Annotation"
         content={selectedText}
+        annotations={annotations}
       />
     </div>
      </div>
+      </div>
+     
      
   </div>
   );

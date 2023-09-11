@@ -1,14 +1,19 @@
 /* PDF container styles */
 .pdf-container {
   position: relative;
-  max-width: 800px; /* Adjust the maximum width as needed */
   margin: 0 auto;
+}
+.pdf-display{
+  position: relative;
+  margin: 0 auto;
+
 }
 
 /* PDF canvas styles */
 .pdf-canvas {
   border: 1px solid #ddd; /* Border for the canvas */
   display: block;
+  max-width: 800px;
 }
 
 /* Selection rectangle styles */
@@ -22,14 +27,11 @@
 
 .pdf-file{
   display: flex;
-  padding: 20px;
   width: 100%;
 }
 
 .annotation{
-  border-radius: 5%;
   width: 30%;
-  background-color: rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  background-color: #faf9f7;
 }
 

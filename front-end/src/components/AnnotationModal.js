@@ -1,16 +1,31 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-function AnnotationModal({ show, onClose, title, content, onAddAnnotation }) {
-  const [annotationTitle, setAnnotationTitle] = useState(''); // State to store the annotation title
+function AnnotationModal({ show, onClose, title, content, onAddAnnotation, annotations }) {
+  const [annotationTitle, setAnnotationTitle] = useState('');
   const [annotationContent, setAnnotationContent] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isInputDoubleClick, setIsInputDoubleClick] = useState(false);
+  const suggestions = annotations.slice(0, 4).map((annotation) => annotation.title);
+
   useEffect(() => {
-    // Update annotationContent when content prop changes
     setAnnotationContent(content);
   }, [content]);
+
   const handleTitleChange = (e) => {
-    setAnnotationTitle(e.target.value);
+    const value = e.target.value;
+    setAnnotationTitle(value);
+    setShowSuggestions(value.trim() !== '');
+  };
+
+  const handleDoubleClick = () => {
+    setIsInputDoubleClick(true);
+    setShowSuggestions(true);
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setAnnotationTitle(suggestion);
+    setShowSuggestions(false);
   };
 
   const handleContentChange = (e) => {
@@ -20,6 +35,7 @@ function AnnotationModal({ show, onClose, title, content, onAddAnnotation }) {
   const handleAddClick = () => {
     onAddAnnotation(annotationTitle, annotationContent);
   };
+
   return (
     <div>
       <div
@@ -42,38 +58,59 @@ function AnnotationModal({ show, onClose, title, content, onAddAnnotation }) {
               ></button>
             </div>
             <div className="modal-body">
-            <form>
-            <div className="mb-3">
-            <label htmlFor="recipient-name" className="col-form-label">
-                Your script title:
-              </label>
-              <input
-            type="text"
-            className="form-control"
-            id="recipient-name"
-            value={annotationTitle}
-            onChange={handleTitleChange}
-          />
-              
-            </div>
-            <div className="mb-3">
-              <label htmlFor="message-text" className="col-form-label">
-                Saved Script
-              </label>
-              <textarea
-            className="form-control"
-            id="message-text"
-            defaultValue={annotationContent}  // Set the value here
-            onChange={handleContentChange}           ></textarea>
-            </div>
-          </form>
+              <form>
+                <div className="mb-3 position-relative">
+                  <label htmlFor="recipient-name" className="col-form-label">
+                    Your script title:
+                  </label>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Type something..."
+                      value={annotationTitle}
+                      onChange={handleTitleChange}
+                      onDoubleClick={handleDoubleClick}
+                    />
+                    {showSuggestions && isInputDoubleClick && (
+                      <ul className="list-group position-absolute w-100" style={{ zIndex: 100 }}>
+                        {suggestions
+                          .filter((suggestion) =>
+                            suggestion.toLowerCase().includes(annotationTitle.toLowerCase())
+                          )
+                          .map((suggestion, index) => (
+                            <li
+                              key={index}
+                              className="list-group-item list-group-item-action"
+                              onClick={() => handleSuggestionClick(suggestion)}
+                              style={{ width: '100%' }}
+                            >
+                              {suggestion}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="message-text" className="col-form-label">
+                    Saved Script
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="message-text"
+                    defaultValue={annotationContent}
+                    onChange={handleContentChange}
+                  ></textarea>
+                </div>
+              </form>
             </div>
             <div className="modal-footer">
-        <button type="button" className="btn btn-primary" onClick={handleAddClick}>
-          Add Annotation
-        </button>
-      </div>
-
+              <button type="button" className="btn btn-primary" onClick={handleAddClick}>
+                Add Annotation
+              </button>
+            </div>
           </div>
         </div>
       </div>
