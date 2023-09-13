@@ -24,7 +24,7 @@ function App() {
       console.error('Error fetching data:', error);
     }
   };
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [setSelectedOption] = useState(null);
   const [showDisplayImage, setShowDisplayImage] = useState(false);
   const [showUploadPDF, setShowUploadPDF] = useState(false);
   const [showPopup, setShowPopup] = useState(false);

@@ -4,8 +4,8 @@ import './PDFViewer.css'; // You can define your own styles
 
 const PDFViewer = ({ file }) => {
   const [pdfDoc, setPdfDoc] = useState(null);
-  const [pageNum, setPageNum] = useState(1);
-  const [scale, setScale] = useState(1);
+  const [pageNum ] = useState(1);
+  const [scale] = useState(1);
   const [isSelecting, setIsSelecting] = useState(false);
   const [selectionRect, setSelectionRect] = useState({
     x: 0,

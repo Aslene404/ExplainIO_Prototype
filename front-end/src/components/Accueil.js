@@ -18,7 +18,7 @@ function Accueil() {
     }, 3000); // Change image every 5 seconds (adjust as needed)
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, [backgroundImages]);
+  }, [backgroundImages.length]);
 
   const backgroundStyle = {
     backgroundImage: `url(${backgroundImages[imageIndex]})`,
