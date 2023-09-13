@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/+esm'
+import pdfjsDist from 'pdfjs-dist';
 import './PDFViewer.css'; // You can define your own styles
-pdfjsDist.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsDist.version}/pdf.worker.js`;
 
 const PDFViewer = ({ file }) => {
   const [pdfDoc, setPdfDoc] = useState(null);
