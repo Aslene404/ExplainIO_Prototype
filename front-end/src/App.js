@@ -1,69 +1,25 @@
-import React, { useState } from 'react';
-import './App.css';
-import FileUpload from './components/FileUpload';
-import ChooseAvatar from './components/ChooseAvatar';
-import Accueil from './components/Accueil';
-import Popup from './components/Popup';
+import React  from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import PDFViewer from './pages/PDFViewer';
+import './App.css'
 
-function App() {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [showDisplayImage, setShowDisplayImage] = useState(false);
-  const [showUploadPDF, setShowUploadPDF] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+function App (){
+ 
+  return(
+    <BrowserRouter>
+    <main>
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="home" element={<Home />}></Route>
+        <Route path="/pdf-viewer" element={<PDFViewer />}></Route>
 
+      </Routes>
+    </main>
+    </BrowserRouter>
+  )
 
-  const options = ["Dialog zwischen Kollegen", "Frontalunterricht", "Ohne Charakter"];
-
-  const handleOptionSelection = (option) => {
-    setSelectedOption(option);
-    setShowDisplayImage(true);
-  };
-
-  const handleShowUploadPDF = () => {
-    setShowDisplayImage(false);
-    setShowUploadPDF(true);
-  };
-
-  const handlePopupOpen = () => {
-    setShowPopup(!showPopup);
-  };
-
-  const handlePopupClose = () => {
-    setShowPopup(false);
-
-  };
-
-  return (
-    <div className="App">
-
-      {showUploadPDF ? (
-        <FileUpload />
-      ) : showDisplayImage ? (
-        <ChooseAvatar />
-      ) : (
-        <Accueil />
-      )}
-      {showDisplayImage && (
-        <img
-          src={'/image.png'}
-          alt="Next"
-          onClick={handleShowUploadPDF}
-          className='uploadPdf'
-        />
-      )}
-      {!showDisplayImage && !showUploadPDF  ? (
-      <button
-        onClick={handlePopupOpen} 
-        className="popup-button" style={{margin:'20px 10px'}}>
-        Lass es uns versuchen
-      </button>): ''}
-      {showPopup && (
-        <Popup options={options} onSelection={handleOptionSelection} onClose={handlePopupClose} />
-
-      )}
-    </div>
-    
-  );
 }
 
-export default App;
+export default App

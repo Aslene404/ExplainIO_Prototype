@@ -27,13 +27,19 @@ function AnnotationModal({ show, onClose, title, content, onAddAnnotation, annot
     setAnnotationTitle(suggestion);
     setShowSuggestions(false);
   };
-
+  const resetFields = () => {
+    setAnnotationTitle('');
+    setAnnotationContent('');
+    setShowSuggestions(false);
+    setIsInputDoubleClick(false);
+  };
   const handleContentChange = (e) => {
     setAnnotationContent(e.target.value);
   };
 
   const handleAddClick = () => {
     onAddAnnotation(annotationTitle, annotationContent);
+    resetFields();
   };
 
   return (
@@ -107,7 +113,7 @@ function AnnotationModal({ show, onClose, title, content, onAddAnnotation, annot
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={handleAddClick}>
+              <button type="button" class="btn btn-outline-success" onClick={handleAddClick}>
                 Add Annotation
               </button>
             </div>

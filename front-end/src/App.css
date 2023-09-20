@@ -1,283 +1,42 @@
 .App {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #E6CECE;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  border-radius: 5px;
-  width: 350px;
-  height: 240px;
-  border-radius: 10px;
-  display: flex;
-  z-index: 2;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: flex-start;
-}
-
-li {
-  color: #F7F7F7;
-  padding: 10px 0;
-  font-size: larger;
-}
-
-.popup-confirm {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px 20px;
-  background-color: #f5ce65;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.uploadPdf{
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  margin: 10px 10px;
-}
-
-.avatar-container {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-
-}
-
-.image-container {
-  display: flex;
-  width: 100%;
-}
-
-.avatar-images {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 5;
-}
-
-.image {
-  width: 100px;
-  height: 100px;
-  margin: 20px;
-}
-
-.image-selected{
-  width: 200px;
-  height: 400px;
-}
-
-.audio-list{
-  display: flex;
   text-align: center;
-  justify-content: center;
-  gap: 10px;
 }
 
-.selected-avatar {
-  margin-top: 5%;
-  margin-left: 5%;
-  width: 100%;
-  height: 500px;
-  border: dashed;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  align-self: center;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.selected-avatars {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: 100%;
-  align-items: center;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.selected-border {
-  border: solid 1px #e0e0e0;
-}
-
-.background {
-  height: 50px;
-  border-radius: 5px;
-  background-color: #e0e0e0;
-  border: none;
-  margin-top: 5px;
-}
-
-.home-page {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+.App-header {
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-
-.content-container{
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 20px;
-   border-radius: 10px;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.7);
-
-    position: relative;
-    z-index: 1;
+.App-link {
+  color: #61dafb;
 }
 
-.popup-button{
-  margin: 10px 5px;
-  position: absolute;
-  inline-size: fit-content;
-  background-color: #e6cece;
-  color: #fff;  
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  height: 30px;
-  inline-size: fit-content;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-.popup-button:hover{
-  background-color: #9E221D;
-}
-
-
-.top-buttons {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.login-button,
-.signin-button {
-  background-color: #e6cece;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  height: 30px;
-  inline-size: fit-content;
-
-}
-
-.login-button:hover,
-.signin-button:hover {
-  background-color: #9E221D;
-}
-.guide-button{
-  background-color: #e6cece;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  left: 160px;
-  height: 30px;
-  inline-size: fit-content;
-  border-radius: 4px;
-}
-
-.guide-button:hover {
-  background-color: #9E221D;
-}
-
-.guide-container {
-  position: fixed;
-  width: 700px;
-  height: 500px;
-  background-color: rgba(0, 0, 0, 0.3); 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; 
-  flex-direction: column;
-}
-
-.voice-select {
-  position: absolute;
-  width: 100%;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  right: 220px;
-}
-
-.voice-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-  user-select: none;
-  width: 200px;
-  height: 50px;
-  border-radius: 5px;
-  background-color: #e0e0e0;
-  margin-top: -4px;
-}
-  
-.arrow-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.arrow-up {
-  transform: rotate(180deg);
-}
-
-.voice-list {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-top: none;
-  max-height: 100px;
-  overflow-y: auto;
-  width: 200px;
-}
-
-.voice {
-  padding: 10px;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease;
-}
-
-.selected-voice {
-  background-color: #ccc;
-}
-
-audio {
-  margin-top: 10px;
+.highlighted-text {
+  background-color: rgba(255, 255, 0, 0.438); /* You can use any color you prefer */
+  /* You can also define other styles for the highlighted text, such as font color */
 }
