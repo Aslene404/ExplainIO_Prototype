@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 import {
   faMagnifyingGlassPlus, faMagnifyingGlassMinus, faForward,
   faBackward, faTrashCan, faNoteSticky
@@ -14,7 +15,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pd
 function PDFViewer() {
   const location = useLocation();
   const file = location.state && location.state.file;
-  
+  const navigate = useNavigate();
   const [numPages, setNumPages] = useState(null);
   const [selectedText, setSelectedText] = useState('');
   const [scale, setScale] = useState(2);
@@ -23,19 +24,18 @@ function PDFViewer() {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [disabledColor,setDisabledColor] = useState('#94a4a6');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   
  
  const handleSearch = async () => {
   if (searchText && numPages ) {
     const arrayBuffer = await file.arrayBuffer();
     const pdfDocument = await pdfjs.getDocument({ data: arrayBuffer }).promise;
-    console.log('tji lenna ');
     const allSearchResults = [];
 
     for (let pageIndex = 0; pageIndex < numPages; pageIndex++) {
       const page = await pdfDocument.getPage(pageIndex + 1);
       const textContent = await page.getTextContent();
-      console.log(" o ba3d lenna");
       for (let item of textContent.items) {
         const text = item.str;
         let startIndex = -1;
@@ -48,37 +48,28 @@ function PDFViewer() {
           };
           allSearchResults.push({text,rangeLikeObject, pageIndex});
           console.log(allSearchResults);
-          // Highlight the text and accumulate it
         }
 
       }
       setSearchResults(allSearchResults);
-      console.log("trah lenna ",searchResults);
 
 
     }
 
-    // Set the accumulated highlighted text in the state
-
-    // Now, set the search results
-    
-    // Set all search results in the state
+  
   }
 };
 
+   const handleNext = () => {
+    navigate("/createVideo", { state: { text: annotations } });
+   }
 
-
-  // Function to highlight text within a given range in HTML
+ 
   
   
-  const handleClearSearch = () => {
-    setSearchText('');
-    setSearchResults([]);
-  };
-  const onDocumentLoadSuccess = ({ numPages,  ...pdfInfo }) => {
+  
+  const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
-    // Store the pdfDoc reference when the document is loaded
-    console.log(pdfInfo);
   };
 
   const [showMyModal, setShowMyModal] = useState(false);
@@ -92,7 +83,7 @@ function PDFViewer() {
 
 
   const toggleTextSelection = () => {
-    setTextSelectionActive(!textSelectionActive); // Toggle text selection
+    setTextSelectionActive(!textSelectionActive); 
     textSelectionActive ? setDisabledColor("#94a4a6") :setDisabledColor("#198754") 
   };
 
@@ -115,6 +106,7 @@ function PDFViewer() {
       }
 
     }
+    setIsButtonDisabled(false);
 
     // Close the modal
     setShowMyModal(false);
@@ -259,41 +251,19 @@ function PDFViewer() {
                     <FontAwesomeIcon icon={faMagnifyingGlassMinus} size='xl' style={{ color: "#198754", marginRight: 100 }} />
                   </li>
                 </a>
-                <a class="nav-link">
-                  <li class="nav-item">
-                    <FontAwesomeIcon icon={faForward} size='xl' style={{ color: "#198754", marginRight: 100 }} />
-                  </li>
-                </a>
+                
                 <a class="nav-link">
                   <li class="nav-item">
                     <FontAwesomeIcon icon={faBackward} size='xl' style={{ color: "#198754", marginRight: 100 }} />
                   </li>
                 </a>
+                <a class="nav-link">
+                  <li class="nav-item">
+                    <FontAwesomeIcon icon={faForward} size='xl' style={{ color: "#198754", marginRight: 100 }} />
+                  </li>
+                </a>
               </ul>
-              <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <button
-          class="btn btn-outline-success"
-          type="button"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
-        <button
-          class="btn btn-outline-danger"
-          type="button"
-          onClick={handleClearSearch}
-        >
-          Clear Search
-        </button>
-      </form>
+
             </div>
           </div>
         </nav>
@@ -301,37 +271,15 @@ function PDFViewer() {
         <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
   {[...Array(numPages)].map((_, pageIndex) => (
     <Page key={pageIndex + 1} pageNumber={pageIndex + 1} scale={scale}>
-      {searchResults.map((result, resultIndex) => {
-        console.log(result)
 
-        if (result.pageIndex === pageIndex) {
-          console.log(result)
-          const startTag = '<span class="highlighted-text">';
-          const endTag = '</span>';
-          const final =  result.text.substring(0, result.rangeLikeObject.start) +
-          startTag +
-          result.text.substring(result.rangeLikeObject.start, result.rangeLikeObject.end) +
-          endTag +
-           result.text.substring(result.rangeLikeObject.end)
-  
-
-          // Render the textContent inside a span with the 'highlighted-text' class
-          return (
-            <React.Fragment key={resultIndex}>
-              {final}
-            </React.Fragment>
-          );
-        }
-        return null;
-      })}
     </Page>
   ))}
 </Document>
 
 
-
          
         </div>
+
         <div>
           <button
             style={{ margin: 20, display: "none" }}
@@ -351,8 +299,16 @@ function PDFViewer() {
             annotations={annotations}
           />
         </div>
+
        
       </div>
+      <button style={{ 
+    position: 'fixed',
+    bottom: 20,
+    right: 20,
+    zIndex: 101 
+  }} type="button" class="btn btn-success" onClick={handleNext} disabled={isButtonDisabled}><strong>Next</strong></button>
+
     </div>
   );
 }

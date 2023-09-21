@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import PDFViewer from './pages/PDFViewer';
+import DisplayVideo from './pages/DisplayVideo';
+import CreateVideo from './pages/CreateVideo';
 import './App.css'
 
 function App (){
@@ -14,6 +16,9 @@ function App (){
         <Route path="/" element={<Login />}></Route>
         <Route path="home" element={<Home />}></Route>
         <Route path="/pdf-viewer" element={<PDFViewer />}></Route>
+        <Route path="/createVideo" element={<CreateVideo />}></Route>
+        <Route path="/displayVideo" element={<DisplayVideo />}></Route>
+
 
       </Routes>
     </main>

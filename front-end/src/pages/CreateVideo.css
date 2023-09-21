@@ -1,0 +1,34 @@
+/* CreateVideo.css */
+.card-with-bg {
+  position: relative;
+}
+
+.card-bg {
+  position: relative; /* Change to relative to allow card-content to overlay it */
+  overflow: hidden;
+}
+
+.card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Add any additional styling for the background image here */
+}
+
+.card-content {
+  position: absolute; /* Position card-content relative to the card */
+  top: 50%; /* Adjust vertical position */
+  left: 50%; /* Adjust horizontal position */
+  transform: translate(-50%, -50%); /* Center card-content */
+  padding: 20px; /* Add padding to card-content as needed */
+  background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow to card-content */
+  /* Add any other styling for card-content here */
+}
+
+.btn-no-text {
+  /* Style your button without text here */
+  background-color: transparent;
+  border: none;
+  /* Add additional styles as needed */
+}

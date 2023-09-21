@@ -21,17 +21,9 @@ function UploadPdf() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end', // Align the button to the right
-        justifyContent: 'flex-end', // Align the button to the bottom
-        position: 'relative', // Position relative to the parent div
-      }}
-    >
+    <div>
       {!fileSelected && (
-        <label className="btn btn-outline-success" style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
+        <label className="btn btn-success" style={{ bottom: '10px', right: '10px' }}>
           Choose a PDF file
           <input
             type="file"
@@ -42,7 +34,7 @@ function UploadPdf() {
         </label>
       )}
       {selectedFile && (
-        <button className="btn btn-primary" onClick={navigateToPDFViewer}>
+        <button className="btn btn-success"style={{ bottom: '10px', right: '10px' }} onClick={navigateToPDFViewer}>
           View PDF
         </button>
       )}

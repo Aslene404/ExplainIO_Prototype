@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.png';
-import background from './backgroundOne.jpg'
+import logo from '../assets/logo.png';
+import background from '../assets/backgroundOne.jpg'
 const Login = () => {
   
   const navigation = useNavigate();
