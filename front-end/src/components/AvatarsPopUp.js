@@ -16,11 +16,27 @@ const avatars = [
   { image: av_6, name: "Sofia" },
 ];
 
-const AvatarPopUp = ({ show, onClose }) => {
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
+const AvatarsPopUp = ({ show, onClose }) => {
+  const [selectedAvatars, setSelectedAvatars] = useState([]);
 
   const handleAvatarClick = (avatar) => {
-    setSelectedAvatar(avatar);
+    // Check if two avatars are already selected
+    if (selectedAvatars.length === 2) {
+      return; // Do nothing if two avatars are already selected
+    }
+
+    // Check if the clicked avatar is already selected
+    const isAvatarSelected = selectedAvatars.includes(avatar);
+
+    if (isAvatarSelected) {
+      // If it's already selected, unselect it
+      setSelectedAvatars((prevSelectedAvatars) =>
+        prevSelectedAvatars.filter((selected) => selected !== avatar)
+      );
+    } else {
+      // If it's not selected and there are less than two selected, select it
+      setSelectedAvatars([...selectedAvatars, avatar]);
+    }
   };
 
   return (
@@ -29,7 +45,7 @@ const AvatarPopUp = ({ show, onClose }) => {
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">New message</h1>
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Select Two Avatars</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={onClose}></button>
             </div>
             <div className="modal-body">
@@ -38,7 +54,7 @@ const AvatarPopUp = ({ show, onClose }) => {
                   {avatars.map((avatar, index) => (
                     <div className="col-md-4" key={index}>
                       <div
-                        className={`avatar-container ${selectedAvatar === avatar ? 'selected' : ''}`}
+                        className={`avatar-container ${selectedAvatars.includes(avatar) ? 'selected' : ''}`}
                         onClick={() => handleAvatarClick(avatar)}
                       >
                         <img src={avatar.image} alt={`Avatar ${index + 1}`} className="img-fluid" />
@@ -50,8 +66,15 @@ const AvatarPopUp = ({ show, onClose }) => {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={onClose}>Close</button>
-              <button type="button" className="btn btn-primary">Send message</button>
+              <button
+                type="button"
+                className="btn"
+                style={{ backgroundColor: "#89b248", color: "white", borderRadius: 20 }}
+                disabled={selectedAvatars.length !== 2}
+                onClick={onClose}
+              >
+                <strong>Next</strong>
+              </button>
             </div>
           </div>
         </div>
@@ -60,4 +83,4 @@ const AvatarPopUp = ({ show, onClose }) => {
   );
 };
 
-export default AvatarPopUp;
+export default AvatarsPopUp;
