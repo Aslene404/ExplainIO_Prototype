@@ -1,7 +1,12 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import avatar from "../assets/avatar.png";
+import { useNavigate } from 'react-router-dom';
+
 const Navbar = () => {
+  const navigation = useNavigate();
+const handleSubmit = () => {
+  navigation("/profile");  };
   return (
     <nav
       class="navbar navbar-expand-lg bg-body-tertiary"
@@ -76,7 +81,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div class="d-flex align-items-center">
-            <div
+            <div  onClick={handleSubmit}
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -85,13 +90,13 @@ const Navbar = () => {
                 marginRight: 30
               }}
             >
-              <img
+              <img 
                 src={avatar}
                 alt="Avatar"
                 class="rounded-circle me-2"
                 width="45"
                 height="45"
-                style={{ border: '4px solid #157347' }}              />
+                style={{ border: '4px solid #157347' }} />
               
             </div>
           </div>
