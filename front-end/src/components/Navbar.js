@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const navigation = useNavigate();
 const handleSubmit = () => {
-  navigation("/profile");  };
+  navigation("/profil");  };
   return (
     <nav
       class="navbar navbar-expand-lg bg-body-tertiary"

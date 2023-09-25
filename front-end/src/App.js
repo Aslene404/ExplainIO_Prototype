@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import PDFViewer from './pages/PDFViewer';
 import DisplayVideo from './pages/DisplayVideo';
 import CreateVideo from './pages/CreateVideo';
-import Profile from './pages/Profile';
+import Profil from './pages/Profil';
 import './App.css'
 
 function App (){
@@ -19,7 +19,7 @@ function App (){
         <Route path="/pdf-viewer" element={<PDFViewer />}></Route>
         <Route path="/createVideo" element={<CreateVideo />}></Route>
         <Route path="/displayVideo" element={<DisplayVideo />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/profil" element={<Profil />}></Route>
 
 
       </Routes>
