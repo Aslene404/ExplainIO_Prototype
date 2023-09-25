@@ -11,14 +11,37 @@ import {
   faPhone,
   faUser,
   faSchool,
-  faXmark,
+  faXmark,faCamera
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Profile() {
+    const [name, setName] = useState("Aeloria Magnar");
+  const [address, setAddress] = useState("Musterstraße 123 12345 Musterstadt Deutschland");
+  const [phone, setPhone] = useState("+1 (555) 123-4567");
+  const [email, setEmail] = useState("Aeloria-magnar@gmail.com");
+  const [school, setSchool] = useState("Hauptschule");
+  const [birthdate, setBirthdate] = useState("12/08/2023");
   const [activeItem, setActiveItem] = useState(1);
+  const [avatarImage, setAvatarImage] = useState(avatar);
+
+  const handleImageChange = (e) => {
+    const selectedImage = URL.createObjectURL(e.target.files[0]);
+    setAvatarImage(selectedImage);
+  };
 
   const handleItemClick = (item) => {
     setActiveItem(item);
+  };
+
+  const handleSaveClick = () => {
+    // make an API call or store in local storage.
+    console.log("Name:", name);
+    console.log("Address:", address);
+    console.log("Phone:", phone);
+    console.log("Email:", email);
+    console.log("School:", school);
+    console.log("Birthdate:", birthdate);
+    console.log("Avatar Image:", avatarImage);
   };
 
   let content;
@@ -32,15 +55,40 @@ export default function Profile() {
           justifyContent: "space-around",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img
-            src={avatar}
-            alt="Avatar"
-            class="rounded-circle me-2"
-            width="200"
-            height="200"
-            style={{ border: "3px solid #eee" }}
+        <div style={{ display: "flex", alignItems: "center" ,
+              flexDirection: "column",
+              position: "relative", justifyContent:"center"}}>
+            <img
+              src={avatarImage}
+              alt="Avatar"
+              className="rounded-circle me-2"
+              width="200"
+              height="200"
+              style={{ border: "3px solid #eee", cursor: "pointer" }}
+            />
+           <input
+            type="file"
+            id="imageUpload"
+            style={{ display: "none" }}
+            accept="image/*"
+            onChange={handleImageChange}
           />
+          <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
+            <FontAwesomeIcon
+              icon={faCamera}
+              style={{
+                position: "absolute",
+                bottom: "60px",
+                right: "10px",
+                background: "#fff",
+                padding: "5px",
+                color: "#ccc",
+                border: "3px solid #eee",
+                borderRadius: "50%",
+                fontSize: "24px",
+              }}
+            />
+          </label>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ padding: "10px" }}>
@@ -103,10 +151,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+                cursor:"pointer"
               }}
             />
             <span>Newton and gravity</span>
@@ -133,10 +182,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Einstein's theory</span>
@@ -163,10 +213,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Newton and gravity</span>
@@ -193,10 +244,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Einstein's theory</span>
@@ -223,10 +275,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Newton and gravity</span>
@@ -253,10 +306,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Einstein's theory</span>
@@ -282,10 +336,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Newton and gravity</span>
@@ -312,10 +367,11 @@ export default function Profile() {
                 position: "absolute",
                 top: 0, 
                 right: 0, 
-                background: "rgba(0, 0, 0, 0.5)",  
+                background: "rgba(0, 0, 0, 0.4)",  
                 padding: "4px", 
                 borderRadius:"5px",
-                color:"#fff"
+                color:"#fff",
+cursor:"pointer"
               }}
             />
             <span>Einstein's theory</span>
@@ -323,6 +379,198 @@ export default function Profile() {
          
         </div>
       </div>
+    );
+  }
+  else if(activeItem === 3) {
+    content = (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "space-around",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            position: "relative",
+            justifyContent: "center",
+          }}
+        >
+            <img
+              src={avatarImage}
+              alt="Avatar"
+              className="rounded-circle me-2"
+              width="200"
+              height="200"
+              style={{ border: "3px solid #eee", cursor: "pointer" }}
+            />
+           <input
+            type="file"
+            id="imageUpload"
+            style={{ display: "none" }}
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
+            <FontAwesomeIcon
+              icon={faCamera}
+              style={{
+                position: "absolute",
+                bottom: "60px",
+                right: "10px",
+                background: "#fff",
+                padding: "5px",
+                color: "#ccc",
+                border: "3px solid #eee",
+                borderRadius: "50%",
+                fontSize: "24px",
+              }}
+            />
+          </label>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{padding:"1px 10px",display:"flex",
+                alignItems:"center", }}>
+            <div><FontAwesomeIcon icon={faUser} style={{ color: "#86b7fe" }} /></div>
+            <span
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                cursor: "text",
+                marginLeft:"10px",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                width:"320px"
+              }}
+              contentEditable
+              onBlur={(e) => setName(e.target.textContent)}
+            >
+              {name}
+            </span>
+          </div>
+          <div style={{padding:"1px 10px",display:"flex",
+                alignItems:"center", }}>
+           <div> <FontAwesomeIcon
+              icon={faLocationDot}
+              style={{ color: "#86b7fe" }}
+            /></div>
+            <span
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                cursor: "text",marginLeft:"10px",
+                display:"flex",
+                alignItems:"center",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                width:"320px"
+
+              }}
+              contentEditable
+              onBlur={(e) => setAddress(e.target.textContent)}
+            >
+              {address}
+            </span>
+          </div>
+          <div style={{padding:"1px 10px",display:"flex",
+                alignItems:"center", }}>
+           <div> <FontAwesomeIcon icon={faPhone} style={{ color: "#86b7fe" }} /></div>
+            <span
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                cursor: "text",
+                marginLeft:"10px", overflow: "hidden",
+                whiteSpace: "nowrap",
+                width:"320px"
+              }}
+              contentEditable
+              onBlur={(e) => setPhone(e.target.textContent)}
+            >
+              {phone}
+            </span>
+          </div>
+          <div style={{padding:"1px 10px",display:"flex",
+                alignItems:"center", }}>
+           <div><FontAwesomeIcon icon={faAt} style={{ color: "#86b7fe" }} /></div> 
+            <span
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                cursor: "text",marginLeft:"10px", overflow: "hidden",
+                whiteSpace: "nowrap",
+                width:"320px"
+              }}
+              contentEditable
+              onBlur={(e) => setEmail(e.target.textContent)}
+            >
+              {email}
+            </span>
+          </div>
+          <div style={{padding:"1px 10px",display:"flex",
+                alignItems:"center", }}>
+            <div><FontAwesomeIcon icon={faSchool} style={{ color: "#86b7fe" }} /></div>
+            <span
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                cursor: "text",marginLeft:"10px", overflow: "hidden",
+                whiteSpace: "nowrap",
+                width:"320px"
+              }}
+              contentEditable
+              onBlur={(e) => setSchool(e.target.textContent)}
+            >
+              {school}
+            </span>
+          </div>
+          <div style={{padding:"1px 10px",display:"flex",
+                alignItems:"center", }}>
+           <div> <FontAwesomeIcon
+              icon={faCalendarDays}
+              style={{ color: "#86b7fe" }}
+            /></div>
+            <span
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                cursor: "text",marginLeft:"10px", overflow: "hidden",
+                whiteSpace: "nowrap",
+                width:"320px"
+              }}
+              contentEditable
+              onBlur={(e) => setBirthdate(e.target.textContent)}
+            >
+              {birthdate}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div style={{  
+            position: "relative",
+           }}>
+      <button style={{
+              position: "absolute",
+              right: "10px",
+              background: "green",
+              padding: "3px",
+              color: "#fff",
+              cursor: "pointer",
+              border:"none",top:"22px",
+              borderRadius:"5px",
+              width:"70px"
+            }}>Save</button>
+    </div></div>
     );
   }
 
@@ -343,7 +591,7 @@ export default function Profile() {
         style={{
           backgroundColor: "#fff",
           width: "810px",
-          height: "480px",
+          height: "500px",
           padding: "10px 0px",
           boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.5)",
           borderRadius: " 10px",
