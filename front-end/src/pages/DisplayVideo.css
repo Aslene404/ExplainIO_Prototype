@@ -1,0 +1,14 @@
+.highlighted-word {
+    background-color: yellow; /* Change to your preferred highlight color */
+    font-weight: bold; /* Make the highlighted word bold, you can adjust as needed */
+  }
+  
+  /* Style for the video player container */
+  .video-player-container {
+    width: 50vw;
+    height: 50vh;
+    margin: 20px; /* Adjust the margin as needed */
+  }
+  
+  
+  

@@ -13,11 +13,17 @@ const backgrounds = [
   { image: playground, name: "Playground" },
 ];
 
-const BackgroundPopUp = ({ show, onClose }) => {
+const BackgroundPopUp = ({ show, onClose , onBackgroundSelected}) => {
   const [selectedBackground, setSelectedBackground] = useState(null);
 
   const handleBackgroundClick = (background) => {
     setSelectedBackground(background);
+  };
+  const handleConfirm = () => {
+    // Pass the selected background back to the parent component
+    onBackgroundSelected(selectedBackground);
+    console.log(selectedBackground);
+    onClose();
   };
 
   return (
@@ -60,11 +66,7 @@ const BackgroundPopUp = ({ show, onClose }) => {
                 className="btn"
                 style={{ backgroundColor: "#89b248", color: "white", borderRadius: 20 }}
                 disabled={!selectedBackground}
-                onClick={() => {
-                 
-                  console.log("Selected Background:", selectedBackground);
-                  onClose();
-                }}
+                onClick={handleConfirm}
               >
                <strong>Next</strong>
               </button>

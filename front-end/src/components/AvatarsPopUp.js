@@ -16,7 +16,7 @@ const avatars = [
   { image: av_6, name: "Sofia" },
 ];
 
-const AvatarsPopUp = ({ show, onClose }) => {
+const AvatarsPopUp = ({ show, onClose, onAvatarsSelected }) => {
   const [selectedAvatars, setSelectedAvatars] = useState([]);
 
   const handleAvatarClick = (avatar) => {
@@ -35,7 +35,12 @@ const AvatarsPopUp = ({ show, onClose }) => {
       );
     } else {
       // If it's not selected and there are less than two selected, select it
-      setSelectedAvatars([...selectedAvatars, avatar]);
+      setSelectedAvatars((prevSelectedAvatars) => {
+        const newSelectedAvatars = [...prevSelectedAvatars, avatar];
+        console.log(newSelectedAvatars); 
+        onAvatarsSelected(newSelectedAvatars);
+        return newSelectedAvatars;
+      });
     }
   };
 

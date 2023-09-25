@@ -20,7 +20,7 @@
     border-radius: 10%; /* Create a circular avatar */
   }
   .background-container img {
-    width: 90%; /* Adjust the desired width */
+    width: 100%; /* Adjust the desired width */
     height: 250px; /* Adjust the desired height */
     object-fit: cover; /* Maintain aspect ratio and cover the container */
     border-radius: 10%; /* Create a circular avatar */
@@ -44,4 +44,30 @@
   border: 2px solid #3b5b7a; /* Add a black border when selected */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
   border-radius: 20px;/* Add a shadow when selected */
+}
+/* CSS for the voice container */
+.voices-container {
+  margin-bottom: 20px; /* Add space between voice containers */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer; /* Add a pointer cursor for better user interaction */
+}
+
+.voices-container.selected {
+  border-color: #89b248; /* Change border color for selected voice container */
+}
+
+.voices-container:hover {
+  background-color: #f0f0f0; /* Add a background color on hover for better user feedback */
+}
+
+/* CSS for the audio container */
+.audio-container {
+  margin-bottom: 10px; /* Add space between the audio player and voice name */
+}
+
+/* CSS for the audio player */
+audio {
+  width: 100%; /* Make the audio player fill the container width */
 }
