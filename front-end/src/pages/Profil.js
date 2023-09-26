@@ -435,7 +435,7 @@ cursor:"pointer"
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{padding:"1px 10px",display:"flex",
                 alignItems:"center", }}>
-            <div><FontAwesomeIcon icon={faUser} style={{ color: "#86b7fe" }} /></div>
+            <div style={{width:"20px"}}><FontAwesomeIcon icon={faUser} style={{ color: "#86b7fe" }} /></div>
             <span
               style={{
                 padding: "10px",
@@ -455,7 +455,7 @@ cursor:"pointer"
           </div>
           <div style={{padding:"1px 10px",display:"flex",
                 alignItems:"center", }}>
-           <div> <FontAwesomeIcon
+           <div style={{width:"20px"}}> <FontAwesomeIcon
               icon={faLocationDot}
               style={{ color: "#86b7fe" }}
             /></div>
@@ -480,7 +480,7 @@ cursor:"pointer"
           </div>
           <div style={{padding:"1px 10px",display:"flex",
                 alignItems:"center", }}>
-           <div> <FontAwesomeIcon icon={faPhone} style={{ color: "#86b7fe" }} /></div>
+           <div style={{width:"20px"}}> <FontAwesomeIcon icon={faPhone} style={{ color: "#86b7fe" }} /></div>
             <span
               style={{
                 padding: "10px",
@@ -499,7 +499,7 @@ cursor:"pointer"
           </div>
           <div style={{padding:"1px 10px",display:"flex",
                 alignItems:"center", }}>
-           <div><FontAwesomeIcon icon={faAt} style={{ color: "#86b7fe" }} /></div> 
+           <div style={{width:"20px"}}><FontAwesomeIcon icon={faAt} style={{ color: "#86b7fe" }} /></div> 
             <span
               style={{
                 padding: "10px",
@@ -517,7 +517,7 @@ cursor:"pointer"
           </div>
           <div style={{padding:"1px 10px",display:"flex",
                 alignItems:"center", }}>
-            <div><FontAwesomeIcon icon={faSchool} style={{ color: "#86b7fe" }} /></div>
+            <div style={{width:"20px"}}><FontAwesomeIcon icon={faSchool} style={{ color: "#86b7fe" }} /></div>
             <span
               style={{
                 padding: "10px",
@@ -535,7 +535,7 @@ cursor:"pointer"
           </div>
           <div style={{padding:"1px 10px",display:"flex",
                 alignItems:"center", }}>
-           <div> <FontAwesomeIcon
+           <div style={{width:"20px"}}> <FontAwesomeIcon
               icon={faCalendarDays}
               style={{ color: "#86b7fe" }}
             /></div>
@@ -559,7 +559,9 @@ cursor:"pointer"
       <div style={{  
             position: "relative",
            }}>
-      <button style={{
+      <button 
+      onClick={handleSaveClick}
+      style={{
               position: "absolute",
               right: "10px",
               background: "green",
@@ -627,7 +629,7 @@ cursor:"pointer"
               style={{ display: "flex", justifyContent: "center" }}
             >
               <a
-                href="#step1"
+                href="#about"
                 onClick={() => handleItemClick(1)}
                 style={{
                   marginRight: "20px",
@@ -649,7 +651,7 @@ cursor:"pointer"
               }}
             >
               <a
-                href="#step2"
+                href="#projects"
                 onClick={() => handleItemClick(2)}
                 style={{
                   textDecoration: "none",
@@ -669,7 +671,7 @@ cursor:"pointer"
               }}
             >
               <a
-                href="#step3"
+                href="#setting"
                 onClick={() => handleItemClick(3)}
                 style={{
                   textDecoration: "none",
