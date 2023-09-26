@@ -6,6 +6,7 @@ import PDFViewer from './pages/PDFViewer';
 import DisplayVideo from './pages/DisplayVideo';
 import CreateVideo from './pages/CreateVideo';
 import Profil from './pages/Profil';
+import Contact from './pages/Contact';
 import './App.css'
 
 function App (){
@@ -20,6 +21,7 @@ function App (){
         <Route path="/createVideo" element={<CreateVideo />}></Route>
         <Route path="/displayVideo" element={<DisplayVideo />}></Route>
         <Route path="/profil" element={<Profil />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
 
 
       </Routes>

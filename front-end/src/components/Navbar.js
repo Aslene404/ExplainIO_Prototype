@@ -7,6 +7,8 @@ const Navbar = () => {
   const navigation = useNavigate();
 const handleSubmit = () => {
   navigation("/profil");  };
+  const contact = () => {
+    navigation("/contact");  };
   return (
     <nav
       class="navbar navbar-expand-lg bg-body-tertiary"
@@ -74,10 +76,10 @@ const handleSubmit = () => {
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">
-                Disabled
-              </a>
+            <li class="nav-item" onClick={contact} >
+              <span class="nav-link " >
+              Contact
+              </span>
             </li>
           </ul>
           <div class="d-flex align-items-center">
